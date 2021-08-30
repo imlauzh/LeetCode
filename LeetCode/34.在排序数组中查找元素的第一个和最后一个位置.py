@@ -3,8 +3,6 @@
 #
 # [34] 在排序数组中查找元素的第一个和最后一个位置
 #
-
-# @lc code=start
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def binarySearch(nums, target):
@@ -35,4 +33,30 @@ class Solution:
         while upper+1 < n and nums[upper+1] == target:
             upper += 1
         return [lower, upper]
+
+
+# @lc code=start
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binarySearch():
+            left,right=0,n-1
+            while left<=right:
+                mid=(left+right)//2
+                if nums[mid]==target:
+                    return mid
+                elif nums[mid]>target:
+                    right=mid-1
+                else:
+                    left=mid+1
+            return -1
+        n=len(nums)
+        index=binarySearch()
+        if index==-1:
+            return [-1,-1]
+        left=right=index
+        while left-1>=0 and nums[left-1]==target:
+            left-=1
+        while right+1<n and nums[right+1]==target:
+            right+=1
+        return [left,right]
 # @lc code=end

@@ -54,28 +54,16 @@ class Solution:
 
 # @lc code=start
 class Solution:
-    def searchMatrix(self, matrix, target):
-        # an empty matrix obviously does not contain `target` (make this check
-        # because we want to cache `width` for efficiency's sake)
-        if len(matrix) == 0 or len(matrix[0]) == 0:
-            return False
-
-        # cache these, as they won't change.
-        height = len(matrix)
-        width = len(matrix[0])
-
-        # start our "pointer" in the bottom-left
-        row = height-1
-        col = 0
-
-        while col < width and row >= 0:
-            if matrix[row][col] > target:
-                row -= 1
-            elif matrix[row][col] < target:
-                col += 1
-            else:  # found it
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        nr, nc = len(matrix), len(matrix[0])
+        i, j = 0, nc-1
+        while i < nr and j >= 0:
+            if matrix[i][j] == target:
                 return True
-
+            elif matrix[i][j] > target:
+                j -= 1
+            else:
+                i += 1
         return False
 
 # @lc code=end

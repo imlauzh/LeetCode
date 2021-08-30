@@ -29,12 +29,6 @@ class Solution:
         return recursively_check()
 
 
-# @lc code=start
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
         def endOfFirst(head):
@@ -67,5 +61,40 @@ class Solution:
                 return False
             left = left.next
             right = right.next
+        return True
+
+
+# @lc code=start
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        def endofFirst(head):
+            slow = fast = head
+            while fast.next and fast.next.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+
+        def reverse(head):
+            prev = None
+            curr = head
+            while curr:
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+            return prev
+        endFirst = endofFirst(head)
+        startSec = reverse(endFirst.next)
+        curr = head
+        while startSec:
+            if curr.val != startSec.val:
+                return False
+            curr = curr.next
+            startSec = startSec.next
         return True
 # @lc code=end

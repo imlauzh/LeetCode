@@ -26,6 +26,42 @@ class Solution:
         return nums
 
 
+# 快排，非递归版本，使用栈
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def partition(left, right):
+            pivot = random.randint(left, right)
+            nums[right], nums[pivot] = nums[pivot], nums[right]
+            index = left
+            for i in range(left, right):
+                if nums[i] < nums[right]:
+                    nums[i], nums[index] = nums[index], nums[i]
+                    index += 1
+            nums[right], nums[index] = nums[index], nums[right]
+            return index
+
+        def quickSort(left, right):
+            if left >= right:
+                return
+            stack = []
+            stack.append(right)
+            stack.append(left)
+            while stack:
+                i = stack.pop()
+                j = stack.pop()
+                if i < j:
+                    mid = partition(i, j)
+                    # 相等有序，不等再排序
+                    if mid > i:
+                        stack.append(mid-1)
+                        stack.append(i)
+                    if mid < j:
+                        stack.append(j)
+                        stack.append(mid+1)
+        quickSort(0, len(nums)-1)
+        return nums
+
+
 # 堆排序
 # 利用下沉构建堆
 # 从最后一个非叶子节点往回遍历
@@ -97,34 +133,36 @@ class Solution:
 
 # @lc code=start
 class Solution:
-    def heapSort(self, nums: List[int]):
-        n = len(nums)
-        # 从最后一个非叶子节点执行下沉
-        for i in range(n//2 - 1, -1, -1):
-            self.shift_down(nums, i, n - 1)
-        i = n - 1
-        while i > 0:
-            # 把堆顶也就是最大值放到最后
-            nums[i], nums[0] = nums[0], nums[i]
-            # 执行前面数组的下沉，使之符合堆的结构
-            i -= 1
-            self.shift_down(nums, 0, i)
-        return nums
-
-    def shift_down(self, nums, i, end):
-        tmp = nums[i]
-        while 2 * i + 1 <= end:
-            # 左子节点索引
-            child = 2 * i + 1
-            if child != end and nums[child + 1] > nums[child]:
-                child += 1
-            if tmp < nums[child]:
-                nums[i] = nums[child]
-                i = child
-            else:
-                break
-        nums[i] = tmp
-
     def sortArray(self, nums: List[int]) -> List[int]:
-        return self.heapSort(nums)
+        def partition(left, right):
+            pivot = random.randint(left, right)
+            nums[right], nums[pivot] = nums[pivot], nums[right]
+            index = left
+            for i in range(left, right):
+                if nums[i] < nums[right]:
+                    nums[i], nums[index] = nums[index], nums[i]
+                    index += 1
+            nums[right], nums[index] = nums[index], nums[right]
+            return index
+
+        def quickSort(left, right):
+            if left >= right:
+                return
+            stack = []
+            stack.append(right)
+            stack.append(left)
+            while stack:
+                i = stack.pop()
+                j = stack.pop()
+                if i < j:
+                    mid = partition(i, j)
+                    # 相等有序，不等再排序
+                    if mid > i:
+                        stack.append(mid-1)
+                        stack.append(i)
+                    if mid < j:
+                        stack.append(j)
+                        stack.append(mid+1)
+        quickSort(0, len(nums)-1)
+        return nums
 # @lc code=end
