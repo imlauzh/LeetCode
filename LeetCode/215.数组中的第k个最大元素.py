@@ -3,6 +3,7 @@
 #
 # [215] 数组中的第K个最大元素
 # 快速选择
+# O(n), O(logn)
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         def partition(l, r):
@@ -32,6 +33,7 @@ class Solution:
 
 
 # heapq 调包
+# O(nlogk), O(k)
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         heap = []
@@ -48,6 +50,7 @@ class Solution:
 
 
 # @lc code=start
+# O(nlogk), O(k)
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         '''

@@ -16,17 +16,16 @@ class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         if not l1 or not l2:
             return l1 if l1 else l2
-        head = ListNode(0)
-        pre = head
-
+        hair = ListNode(0)
+        prev = hair
         while l1 and l2:
-            if l1.val < l2.val:
-                pre.next = l1
+            if l1.val <= l2.val:
+                prev.next = l1
                 l1 = l1.next
             else:
-                pre.next = l2
+                prev.next = l2
                 l2 = l2.next
-            pre = pre.next
-        pre.next = l1 if l1 else l2
-        return head.next
+            prev = prev.next
+        prev.next = l1 if l1 else l2
+        return hair.next
 # @lc code=end

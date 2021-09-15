@@ -2,7 +2,7 @@
 # @lc app=leetcode.cn id=141 lang=python3
 #
 # [141] 环形链表
-#
+# hash表
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
         fast=head

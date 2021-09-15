@@ -10,11 +10,11 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        n = len(nums)
-        left, right = 0, 0
-        for i in range(n):
-            if nums[i] != 0:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
-            right += 1
+        n=len(nums)
+        fast=slow=0
+        while fast<n:
+            if nums[fast]!=0:
+                nums[slow],nums[fast]=nums[fast],nums[slow]
+                slow+=1
+            fast+=1
 # @lc code=end

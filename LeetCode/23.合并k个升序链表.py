@@ -28,6 +28,36 @@ class Solution:
         return res
 
 
+# 分治法，两个两个合并，最后合并到一起
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        def merge2Lists(l1, l2):
+            if not l1 or not l2:
+                return l1 if l1 else l2
+            head = ListNode(0)
+            prev = head
+            while l1 and l2:
+                if l1.val <= l2.val:
+                    prev.next = l1
+                    l1 = l1.next
+                else:
+                    prev.next = l2
+                    l2 = l2.next
+                prev = prev.next
+            prev.next = l1 if l1 else l2
+            return head.next
+
+        def divLists(left, right):
+            if left == right:
+                return lists[left]
+            if left > right:
+                return None
+            mid = left+(right-left)//2
+            return merge2Lists(divLists(left, mid), divLists(mid+1, right))
+        res = divLists(0, len(lists)-1)
+        return res
+
+
 # @lc code=start
 # Definition for singly-linked list.
 # class ListNode:

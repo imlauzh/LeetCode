@@ -12,9 +12,9 @@
 #         self.next = next
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
-        slow = fast = head
+        slow=fast=head
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+            slow=slow.next
+            fast=fast.next.next
         return slow
 # @lc code=end

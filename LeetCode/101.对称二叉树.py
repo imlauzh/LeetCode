@@ -3,7 +3,17 @@
 #
 # [101] 对称二叉树
 #
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        def check(leftNode, rightNode):
+            if not leftNode and not rightNode:
+                return True
+            if not leftNode or not rightNode:
+                return False
+            return leftNode.val == rightNode.val and check(leftNode.left, rightNode.right) and check(leftNode.right, rightNode.left)
+        return check(root.left, root.right)
 
+        
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
@@ -19,5 +29,5 @@ class Solution:
             if not leftNode or not rightNode:
                 return False
             return leftNode.val == rightNode.val and check(leftNode.left, rightNode.right) and check(leftNode.right, rightNode.left)
-        return check(root, root)
+        return check(root.left, root.right)
 # @lc code=end
