@@ -3,6 +3,28 @@
 #
 # [34] 在排序数组中查找元素的第一个和最后一个位置
 #
+class Solution(object):
+    def searchRange(self, nums, target):
+        # 第一个小于等于target的位置
+        def binaryLeft(nums, target):
+            n = len(nums)-1
+            left = 0
+            right = n
+            while(left <= right):
+                mid = (left+right)//2
+                if nums[mid] >= target:
+                    right = mid-1
+                if nums[mid] < target:
+                    left = mid+1
+            return left
+        a = binaryLeft(nums, target)
+        b = binaryLeft(nums, target+1)
+        if a == len(nums) or nums[a] != target:
+            return [-1, -1]
+        else:
+            return [a, b-1]
+
+
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def binarySearch(nums, target):
@@ -35,28 +57,40 @@ class Solution:
         return [lower, upper]
 
 
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
+        left = bisect_left(nums, target)
+        right = bisect_right(nums, target)-1
+        if left == len(nums) or nums[left] != target:
+            return [-1, -1]
+        else:
+            return [left, right]
+
+
 # @lc code=start
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def binarySearch():
-            left,right=0,n-1
-            while left<=right:
-                mid=(left+right)//2
-                if nums[mid]==target:
+            left, right = 0, n-1
+            while left <= right:
+                mid = (left+right)//2
+                if nums[mid] == target:
                     return mid
-                elif nums[mid]>target:
-                    right=mid-1
+                elif nums[mid] > target:
+                    right = mid-1
                 else:
-                    left=mid+1
+                    left = mid+1
             return -1
-        n=len(nums)
-        index=binarySearch()
-        if index==-1:
-            return [-1,-1]
-        left=right=index
-        while left-1>=0 and nums[left-1]==target:
-            left-=1
-        while right+1<n and nums[right+1]==target:
-            right+=1
-        return [left,right]
+        n = len(nums)
+        index = binarySearch()
+        if index == -1:
+            return [-1, -1]
+        left = right = index
+        while left-1 >= 0 and nums[left-1] == target:
+            left -= 1
+        while right+1 < n and nums[right+1] == target:
+            right += 1
+        return [left, right]
 # @lc code=end

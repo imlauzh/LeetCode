@@ -31,6 +31,35 @@ class Solution:
         return dfs(n)
 
 
+# 规律，推广到k
+class Solution:
+    def countDigitK(self, n, k):
+        res = 0
+        digit = 1
+        while digit <= n:
+            high = n//digit//10
+            curr = (n//digit) % 10
+            # 注意这里是取余digit
+            low = n % digit
+            if k != 0:
+                if curr > k:
+                    res += (high+1)*digit
+                elif curr == k:
+                    res += high*digit+low+1
+                else:
+                    res += high*digit
+            else:
+                if curr == 0:
+                    res += (high-1)*digit+low+1
+                else:
+                    res += high*digit
+            digit *= 10
+        return res
+
+    def countDigitOne(self, n: int) -> int:
+        return self.countDigitK(n, 1)
+
+
 # @lc code=start
 class Solution:
     def countDigitK(self, n, k):
@@ -39,7 +68,8 @@ class Solution:
         while digit <= n:
             high = n//digit//10
             curr = (n//digit) % 10
-            low = n % 10
+            # 注意这里是取余digit
+            low = n % digit
             if k != 0:
                 if curr > k:
                     res += (high+1)*digit
