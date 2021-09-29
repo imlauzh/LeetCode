@@ -7,3 +7,4 @@ class Solution:
             else:
                 seen.add(num)
         return -1
+
