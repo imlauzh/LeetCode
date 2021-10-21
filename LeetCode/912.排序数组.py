@@ -93,7 +93,7 @@ class Solution:
             child = 2 * i + 1
             if child != end and nums[child + 1] > nums[child]:
                 child += 1
-            if tmp < nums[child]:
+            if nums[child] > tmp:
                 nums[i] = nums[child]
                 i = child
             else:
