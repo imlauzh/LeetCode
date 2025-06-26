@@ -32,7 +32,7 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         n = len(nums)
-        if n == 0 or k == 0:
+        if k == 0:
             return
         k = k % n  
         nums[:] = nums[-k:] + nums[:-k] # python 中 翻转的内置方法

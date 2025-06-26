@@ -41,3 +41,15 @@ class Solution:
                 maxprofit = p-minprice
         return maxprofit
 # @lc code=end
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        ans = 0
+        q = deque()
+        for i, p in enumerate(prices):
+            while q and q[-1] > p:
+                q.pop()
+            q.append(p)
+            ans = max(ans, p - q[0])
+        return ans
